@@ -27,13 +27,12 @@ app.get("/api/recipes/:id", async function (req, res) {
   // Create variable to call helper function with correct argument/input (the id of the parameter)
   const findRecipe = await getRecipeByID(req.params.id);
   //
-  console.log("get hello");
   res.status(200).send({ success: true, payload: findRecipe });
 });
 
 // POST Method to create a new recipe
 app.post("/api/recipes/", async function (req, res) {
-//create recipies
+//create recipes
 const newRecipe = req.body.datIsGood;
 const addedRecipe = await createRecipe(newRecipe) 
 console.log("Hello World");
@@ -41,12 +40,11 @@ res.status(200).send({ success: true, payload: addedRecipe });
 
 })
 //PATCH method to update recipe by ID
-app.patch("api/recipes/:id", async function (req, res){
-  console.log("hello");
+app.patch("/api/recipes/:id", async function (req, res){
 
-  // const updateRecipe = await updateRecipeByID(req.params.id, req.body.title);
-  // res.status(200).send({ success: true, payload: updateRecipe }); 
-  // console.log(updateRecipe);
+  const updateRecipe = await updateRecipeByID(req.params.id, req.body.title);
+  res.status(200).send({ success: true, payload: updateRecipe }); 
+  console.log(updateRecipe);
 })
 
 
