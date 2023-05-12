@@ -9,7 +9,7 @@ const fileName = "recipes.json";
 // Parse the read file (convert from JSON)
 // Return recipes
 export async function getRecipes() {
-  const recipeJSON = await fs.readFile(fileName);
+  const recipesJSON = await fs.readFile(fileName);
   const recipes = JSON.parse(recipeJSON);
   return recipes;
 }
@@ -21,7 +21,7 @@ export async function getRecipes() {
 // Loop through array and find ID
 // Once ID is found, return recipe
 export async function getRecipeByID(id) {
-  const recipeJSON = await fs.readFile(fileName);
+  const recipesJSON = await fs.readFile(fileName);
   const recipes = JSON.parse(recipeJSON);
 
   let recipe = null;
@@ -43,7 +43,7 @@ export async function getRecipeByID(id) {
 // Write to file
 // Return new Recipe
 export async function createRecipe(newRecipe) {
-  const recipeJSON = await fs.readFile(fileName);
+  const recipesJSON = await fs.readFile(fileName);
   const recipes = JSON.parse(recipeJSON);
 
   const newRecipe = {
@@ -57,7 +57,83 @@ export async function createRecipe(newRecipe) {
 }
 
 // UPDATE A RECIPE BY ID
-export async function updateRecipeByID(id, updatedRecipe) {}
+export async function updateRecipeByID(id, updatedRecipe) {
+  const recipesJSON = await fs.readFile
+  (fileName);
+  const recipes = JSON.parse(recipesJSON);
+
+  let recipes = null;
+
+  for (let i = 0; i < recipes.length; i++) {
+    if (recipes[i].id === id) {
+      recipesIndex = i;
+      break;
+    }
+    await fs.writeFile(fileName, JSON.stringify(recipes));
+
+    return quote;
+  
+/*
+export async function editQuote(id, quoteText) {
+  const quotesJSON = await fs.readFile(fileName);
+  const quotes = JSON.parse(quotesJSON);
+
+  let quote = null;
+
+  for (let i = 0; i < quotes.length; i++) {
+    if (quotes[i].id === id) {
+      quote = quotes[i];
+      quotes[i].quoteText = quoteText;
+      break;
+    }
+  }
+
+  await fs.writeFile(fileName, JSON.stringify(quotes));
+
+  return quote;
+
+*/
+
+
+
+
+  
+
+  
 
 // DELETE A RECIPE BY ID
-export async function deleteRecipeByID(id) {}
+export async function deleteRecipeByID(id) {
+  const recipesJSON = await fs.readFile(fileName);
+  const recipes = JSON.parse(recipesJSON);
+
+  let recipesIndex = null; 
+
+  for (let i = 0; i < recipes.length; i++) {
+    if (recipes[i].id === id) {
+      recipesIndex = i;
+      break;
+    }
+    if (recipesIndex !== null) {
+      const deleteRecipe = recipes.splice(recipesIndex, 1);
+      await fs.writeFile(fileName, JSON.stringify(recipes));
+      return deleteRecipe[0];
+    }
+    return null;
+}
+
+
+/*
+export async function deleteQuote(id) {
+  const quotesJSON = await fs.readFile(fileName);
+  const quotes = JSON.parse(quotesJSON);
+
+  let quoteIndex = null;
+
+  for (let i = 0; i < quotes.length; i++) {
+    if (quotes[i].id === id) {
+      quoteIndex = i;
+      break;
+    }
+  }
+  */
+
