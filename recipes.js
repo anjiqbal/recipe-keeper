@@ -43,8 +43,9 @@ export async function getRecipeByID(id) {
 // Write to file
 // Return new Recipe
 export async function createRecipe(newRecipe) {
+  //taking in a new recipe. Everything but the ID.
   const recipesJSON = await fs.readFile(fileName);
-  const recipes = JSON.parse(recipesJSON);
+  const recipes = JSON.parse(recipesJSON); //turns back to Javascript to be able to edit.
 
   const newNewRecipe = {
     id: uuidv4(),
