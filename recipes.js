@@ -31,8 +31,8 @@ export async function getRecipeByID(id) {
       recipe = recipes[i];
       break;
     }
-    return recipe;
   }
+  return recipe;
 }
 
 // CREATE A RECIPE
