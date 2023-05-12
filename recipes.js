@@ -62,17 +62,22 @@ export async function updateRecipeByID(id, updatedRecipe) {
   (fileName);
   const recipes = JSON.parse(recipesJSON);
 
-  let recipes = null;
+  let recipe = null;
 
   for (let i = 0; i < recipes.length; i++) {
     if (recipes[i].id === id) {
-      recipesIndex = i;
+      updatedRecipe = recipes[i];
       break;
     }
     await fs.writeFile(fileName, JSON.stringify(recipes));
+  }
+    return recipe;
+}
 
-    return quote;
-  
+quote = quotes[i];
+quotes[i].quoteText = quoteText;
+
+
 /*
 export async function editQuote(id, quoteText) {
   const quotesJSON = await fs.readFile(fileName);
