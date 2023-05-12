@@ -10,7 +10,7 @@ const fileName = "recipes.json";
 // Return recipes
 export async function getRecipes() {
   const recipesJSON = await fs.readFile(fileName);
-  const recipes = JSON.parse(recipeJSON);
+  const recipes = JSON.parse(recipesJSON);
   return recipes;
 }
 
@@ -22,7 +22,7 @@ export async function getRecipes() {
 // Once ID is found, return recipe
 export async function getRecipeByID(id) {
   const recipesJSON = await fs.readFile(fileName);
-  const recipes = JSON.parse(recipeJSON);
+  const recipes = JSON.parse(recipesJSON);
 
   let recipe = null;
 
@@ -44,74 +44,42 @@ export async function getRecipeByID(id) {
 // Return new Recipe
 export async function createRecipe(newRecipe) {
   const recipesJSON = await fs.readFile(fileName);
-  const recipes = JSON.parse(recipeJSON);
+  const recipes = JSON.parse(recipesJSON);
 
-  const newRecipe = {
+  const newNewRecipe = {
     id: uuidv4(),
     ...newRecipe,
   };
-  recipes.push(newRecipe);
+  recipes.push(newNewRecipe);
   await fs.writeFile(fileName, JSON.stringify(recipes));
 
-  return newRecipe;
+  return newNewRecipe;
 }
 
 // UPDATE A RECIPE BY ID
 export async function updateRecipeByID(id, updatedRecipe) {
-  const recipesJSON = await fs.readFile
-  (fileName);
+  const recipesJSON = await fs.readFile(fileName);
   const recipes = JSON.parse(recipesJSON);
 
   let recipe = null;
 
   for (let i = 0; i < recipes.length; i++) {
     if (recipes[i].id === id) {
-      updatedRecipe = recipes[i];
+      recipe = recipes[i];
+      recipes[i].updatedRecipe = { ...updatedRecipe };
       break;
     }
     await fs.writeFile(fileName, JSON.stringify(recipes));
   }
-    return recipe;
+  return recipe;
 }
-
-quote = quotes[i];
-quotes[i].quoteText = quoteText;
-
-
-/*
-export async function editQuote(id, quoteText) {
-  const quotesJSON = await fs.readFile(fileName);
-  const quotes = JSON.parse(quotesJSON);
-
-  let quote = null;
-
-  for (let i = 0; i < quotes.length; i++) {
-    if (quotes[i].id === id) {
-      quote = quotes[i];
-      quotes[i].quoteText = quoteText;
-      break;
-    }
-  }
-
-  await fs.writeFile(fileName, JSON.stringify(quotes));
-
-  return quote;
-
-*/
-
-
-
-
-  
-
-  
 
 // DELETE A RECIPE BY ID
 export async function deleteRecipeByID(id) {
   const recipesJSON = await fs.readFile(fileName);
   const recipes = JSON.parse(recipesJSON);
 
-  let recipesIndex = null; 
+  let recipesIndex = null;
 
   for (let i = 0; i < recipes.length; i++) {
     if (recipes[i].id === id) {
@@ -124,21 +92,5 @@ export async function deleteRecipeByID(id) {
       return deleteRecipe[0];
     }
     return null;
-}
-
-
-/*
-export async function deleteQuote(id) {
-  const quotesJSON = await fs.readFile(fileName);
-  const quotes = JSON.parse(quotesJSON);
-
-  let quoteIndex = null;
-
-  for (let i = 0; i < quotes.length; i++) {
-    if (quotes[i].id === id) {
-      quoteIndex = i;
-      break;
-    }
   }
-  */
-
+}
