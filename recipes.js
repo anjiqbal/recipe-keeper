@@ -67,11 +67,15 @@ export async function updateRecipeByID(id, updatedRecipe) {
   for (let i = 0; i < recipes.length; i++) {
     if (recipes[i].id === id) {
       recipe = recipes[i];
-      recipes[i] = {id:recipes[i].id, title:updatedRecipe.title,ingredients:updatedRecipe.ingredients,instructions:updatedRecipe.instructions ,image:updatedRecipe.image};
+      recipes[i] = {
+        ...recipes[i],
+        ...updatedRecipe,
+      };
+
       break;
     }
-    await fs.writeFile(fileName, JSON.stringify(recipes));
   }
+  await fs.writeFile(fileName, JSON.stringify(recipes));
   return recipe;
 }
 
