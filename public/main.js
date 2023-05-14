@@ -32,13 +32,14 @@ function handleSubmit(event) {
 
 async function createRecipe() {
   console.log(gatherFormData());
-  const response = await fetch(`${url}/api/recipes`, {
+  const response = await fetch(`${url}/api/recipes/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(gatherFormData()),
   });
   const data = await response.json();
   console.log(data);
+  getRecipes();
 }
 
 function gatherFormData() {
@@ -64,7 +65,6 @@ async function getRecipes() {
   const response = await fetch(`${url}/api/recipes`);
   const { payload } = await response.json();
   recipesSection.innerHTML = "";
-  console.log(payload);
   payload.forEach(renderRecipe);
 }
 
@@ -73,7 +73,23 @@ function renderRecipe(recipe) {
   recipesSection.appendChild(article);
 }
 
-function createRecipeView({ title, ingredients, instructions, image }) {
+function createDeleteButton(id) {
+  const button = document.createElement("Button");
+  button.innerText = "Delete";
+  button.classList.add("deleteButton");
+  button.addEventListener("click", async function () {
+    console.log(id);
+    const response = await fetch(`${url}/api/recipes/${id}`, {
+      method: "DELETE",
+    });
+    if (response.status === 200) {
+      getRecipes();
+    }
+  });
+  return button;
+}
+
+function createRecipeView({ id, title, ingredients, instructions, image }) {
   const article = document.createElement("article");
   const h2 = document.createElement("h2");
   h2.innerText = title;
@@ -83,10 +99,14 @@ function createRecipeView({ title, ingredients, instructions, image }) {
   img.src = image;
   img.alt = title;
   const list = createIngredientsList(ingredients);
+  const deleteButton = createDeleteButton(id);
+
   article.appendChild(h2);
   article.appendChild(img);
   article.appendChild(list);
   article.appendChild(p);
+  article.appendChild(deleteButton);
+
   return article;
 }
 
@@ -102,6 +122,11 @@ function createIngredient(ingredient) {
   const li = document.createElement("li");
   li.innerHTML = ingredient;
   return li;
+}
+
+function handleDelete(event) {
+  event.preventDefault();
+  console.log("heyyyyyyyy");
 }
 
 getRecipes();

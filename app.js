@@ -35,22 +35,20 @@ app.post("/api/recipes/", async function (req, res) {
   //create recipes
   const newRecipe = req.body;
   const addedRecipe = await createRecipe(newRecipe);
-  console.log("Hello World");
+
   res.status(200).send({ success: true, payload: addedRecipe });
 });
 //PATCH method to update recipe by ID
 app.patch("/api/recipes/:id", async function (req, res) {
   const updateRecipe = await updateRecipeByID(req.params.id, req.body);
   res.status(200).send({ success: true, payload: updateRecipe });
-  console.log(updateRecipe);
 });
 
-//DELETE method to delete a recipe by ID 
+//DELETE method to delete a recipe by ID
 app.delete("/api/recipes/:id", async function (req, res) {
   const removeRecipe = await deleteRecipeByID(req.params.id);
-  res.send(removeQuote);
+  res.send(removeRecipe);
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

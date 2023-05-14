@@ -84,18 +84,20 @@ export async function deleteRecipeByID(id) {
   const recipesJSON = await fs.readFile(fileName);
   const recipes = JSON.parse(recipesJSON);
 
-  let recipesIndex = null;
+  let recipeIndex = null;
 
   for (let i = 0; i < recipes.length; i++) {
     if (recipes[i].id === id) {
-      recipesIndex = i;
+      recipeIndex = i;
       break;
     }
-    if (recipesIndex !== null) {
-      const deleteRecipe = recipes.splice(recipesIndex, 1);
-      await fs.writeFile(fileName, JSON.stringify(recipes));
-      return deleteRecipe[0];
-    }
-    return null;
   }
+
+  if (recipeIndex !== null) {
+    const deletedRecipe = recipes.splice(recipeIndex, 1);
+    await fs.writeFile(fileName, JSON.stringify(recipes));
+    return deletedRecipe[0];
+  }
+
+  return null;
 }

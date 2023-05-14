@@ -1,12 +1,12 @@
 body {
   background-color: #f8f8f8;
-  font-family: "Patrick Hand", cursive;
+  font-family: "Open Sans", sans-serif;
   padding: 20px;
   color: #333;
 }
 
 h1 {
-  font-family: "Indie Flower", cursive;
+  font-family: "Open Sans", sans-serif;
   color: #4a4a4a;
   font-size: 3em;
   text-align: center;
@@ -36,7 +36,8 @@ form textarea {
   box-sizing: border-box;
 }
 
-form button {
+form button,
+.deleteButton {
   padding: 10px 20px;
   background-color: #00897b;
   color: #fff;
@@ -45,7 +46,8 @@ form button {
   cursor: pointer;
 }
 
-form button:hover {
+form button:hover,
+.deleteButton:hover {
   background-color: #00695c;
 }
 
@@ -101,7 +103,7 @@ form button:hover {
 
 #recipes img {
   max-width: 100%;
-  height: auto;
+  height: 40%;
   margin-bottom: 20px;
 }
 
