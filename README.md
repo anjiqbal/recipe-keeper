@@ -6,7 +6,7 @@ A full-stack app that allows you to store and delete recipes.
 
 ## Screenshots
 
-![Recipe keeper gif](./images/recipeKeeper.mp4)
+![Recipe keeper gif](./images/recipeKeeper.gif)
 
 ## Motivation
 
